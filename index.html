@@ -1,0 +1,227 @@
+<!doctype html>
+<html lang="sw">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>MUST Freshers Portal 2026</title>
+    <link rel="stylesheet" href="style.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+    />
+  </head>
+  <body>
+    <!-- ================= LANDING PAGE ================= -->
+    <div id="landing-page" class="portal-container active">
+      <header class="official-header">
+        <div class="logo-left">
+          <img src="images/serikali.png" alt="Tanzania Emblem" />
+        </div>
+        <div class="header-text">
+          <h3>The United Republic Of Tanzania</h3>
+          <h4>Ministry of Education, Science and Technology</h4>
+          <h1>MBEYA UNIVERSITY OF SCIENCE AND TECHNOLOGY</h1>
+          <p class="tagline">
+            Leading Centre of Excellence for Knowledge, Skills, and Applied
+            Education in Science and Technology
+          </p>
+        </div>
+        <div class="logo-right">
+          <img src="images/mustLogo.png" alt="MUST Logo" />
+        </div>
+      </header>
+
+      <main class="main-content">
+        <div class="welcome-banner">
+          <h2>WELCOME FRESHERS (2025/2026)</h2>
+          <p>
+            Chagua kozi yako hapa chini ili kupata kiungo cha WhatsApp,
+            wahadhiri, mahitaji, na mfumo wa GPA:
+          </p>
+        </div>
+        <div class="courses-grid" id="landingCoursesGrid"></div>
+      </main>
+    </div>
+
+    <!-- ================= DASHBOARD PAGE ================= -->
+    <div id="dashboard-page" class="portal-container" style="display: none">
+      <nav class="dash-top-nav">
+        <h2 id="dashTitle">Course Portal</h2>
+        <button class="back-home-btn" onclick="goHome()">
+          <i class="fas fa-arrow-left"></i> Rudi Nyuma
+        </button>
+      </nav>
+
+      <div class="dash-body">
+        <!-- Slideshow ya Picha za Chuo -->
+        <div class="campus-slideshow">
+          <!-- Slides zitajazwa na JavaScript -->
+        </div>
+
+        <!-- Kitufe cha WhatsApp -->
+        <div class="wa-action-box">
+          <a id="waLink" href="#" target="_blank" class="official-wa-btn">
+            <i class="fab fa-whatsapp"></i>
+            <span id="waText">Jiunge na Group la WhatsApp la Kozi Yako</span>
+          </a>
+        </div>
+
+        <!-- Sub-Tabs za Maudhui -->
+        <div class="portal-tabs">
+          <button class="t-btn active" onclick="switchTab('gallery')">
+            <i class="fas fa-images"></i> Gallery & Changamano
+          </button>
+          <button class="t-btn" onclick="switchTab('lecturers')">
+            <i class="fas fa-users"></i> Staff & HOD
+          </button>
+          <button class="t-btn" onclick="switchTab('requirements')">
+            <i class="fas fa-clipboard-list"></i> Mahitaji (Requirements)
+          </button>
+          <button class="t-btn" onclick="switchTab('others')">
+            <i class="fas fa-graduation-cap"></i> Grades & GPA
+          </button>
+        </div>
+
+        <div id="tabContentArea" class="tab-display-card"></div>
+
+        <!-- Viongozi Wakuu (Wamewekwa picha halisi kutoka kwenye images folder) -->
+        <div class="leadership-section">
+          <h3>Uongozi Mkuu wa Chuo</h3>
+          <div class="leaders-grid">
+            <div class="leader-card">
+              <img src="images/chancellor.png" alt="Chancellor" />
+              <h4>Hon. Dr. Amani Abeid Karume</h4>
+              <p>Chancellor</p>
+            </div>
+            <div class="leader-card">
+              <img src="images/chairpersonOfChancellor.png" alt="Chairperson" />
+              <h4>Hon. Zakia Hamdani Meghji</h4>
+              <p>Chairperson of the University Council</p>
+            </div>
+            <div class="leader-card">
+              <img src="images/vice%20chancellor.png" alt="Vice Chancellor" />
+              <h4>Prof. Aloys Ntantro Mvuma</h4>
+              <p>Vice Chancellor</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ================= ADMIN PANEL MODAL ================= -->
+    <div id="adminModal" class="modal-overlay">
+      <div class="modal-content">
+        <h3>Admin Management Portal</h3>
+        <form onsubmit="saveAdminData(event)">
+          <label>Chagua Kozi ya Kuhariri au Ongeza Mpya:</label>
+          <select id="adminKeySelect" onchange="populateAdminForm()">
+            <option value="">-- Ongeza Kozi Mpya --</option>
+          </select>
+
+          <label>ID Fupi ya Kozi (mfano: `computer`):</label>
+          <input
+            type="text"
+            id="adminKeyInput"
+            placeholder="computer"
+            required
+          />
+
+          <label>Jina Kamili la Kozi:</label>
+          <input
+            type="text"
+            id="adminTitle"
+            placeholder="Diploma in Computer Science"
+            required
+          />
+
+          <label>Link ya WhatsApp Group:</label>
+          <input
+            type="text"
+            id="adminWa"
+            placeholder="https://chat.whatsapp.com/..."
+            required
+          />
+
+          <hr
+            style="border: 0.5px solid rgba(255, 255, 255, 0.1); margin: 15px 0"
+          />
+          <h4 style="color: var(--must-accent); margin-bottom: 5px">
+            Taarifa za HOD na Staff
+          </h4>
+
+          <label>Jina la Head of Department (HOD):</label>
+          <input
+            type="text"
+            id="adminHod"
+            placeholder="Dr. John Mwakipesile"
+            required
+          />
+
+          <label>Picha ya HOD (Weka path mfano: images/hod1.jpg):</label>
+          <input
+            type="text"
+            id="adminPhoto"
+            placeholder="images/hod1.jpg"
+            required
+          />
+
+          <label>Orodha ya Walimu / Staff (Majina na vyeo):</label>
+          <textarea
+            id="adminStaff"
+            rows="3"
+            placeholder="Mr. Frank - Lecturer&#10;Ms. Rehema - Assistant Lecturer"
+            required
+          ></textarea>
+
+          <hr
+            style="border: 0.5px solid rgba(255, 255, 255, 0.1); margin: 15px 0"
+          />
+          <h4 style="color: var(--must-accent); margin-bottom: 5px">
+            Mahitaji na Alama
+          </h4>
+
+          <label>Mahitaji Maalum ya Kozi (Requirements):</label>
+          <textarea
+            id="adminRequirements"
+            rows="3"
+            placeholder="1. Laptop&#10;2. Sare za chuo"
+            required
+          ></textarea>
+
+          <label>Mwongozo wa Grades & GPA:</label>
+          <textarea
+            id="adminGrades"
+            rows="3"
+            placeholder="A: 70-100% (4.0)&#10;B: 50-59% (3.0)"
+            required
+          ></textarea>
+
+          <label>Picha za Slide (Tenganisha kwa koma):</label>
+          <input
+            type="text"
+            id="adminSlides"
+            placeholder="images/slide 1.png, images/slide 2.png, images/slide 3.png, images/slide 4.png"
+          />
+
+          <button type="submit" class="btn-save">Hifadhi Taarifa (Save)</button>
+          <button type="button" class="btn-delete" onclick="deleteCourse()">
+            Futa Kozi Hii
+          </button>
+          <button type="button" class="btn-close" onclick="closeAdmin()">
+            Funga
+          </button>
+        </form>
+      </div>
+    </div>
+
+    <footer class="official-footer">
+      <button onclick="promptAdmin()">Admin Portal Login</button>
+      <p>
+        &copy; 2026 Mbeya University of Science and Technology (MUST). All
+        Rights Reserved.
+      </p>
+    </footer>
+
+    <script src="script.js"></script>
+  </body>
+</html>
